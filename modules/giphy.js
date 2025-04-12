@@ -1,7 +1,7 @@
 /**
  * Fetches a Giphy image URL for the given search term.
  * @param {string} search - Search term for the Giphy API.
- *  * @param {function} start_cb - Optional callback function to execute at the start (before the request).
+ * @param {function} start_cb - Optional callback function to execute at the start (before the request).
  * @param {function} end_cb - Optional callback function to execute after the request completes (or fails).
  * @returns {Promise<string|null>} URL of the GIF or `null` on failure.
  */
