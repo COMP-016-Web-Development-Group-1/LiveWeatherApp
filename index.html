@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Live Weather App + Giphy</h1>
+
+        <!-- Search form -->
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Enter city name" />
+            <button type="button" id="searchBtn">Search</button>
+        </form>
+
+        <!-- Loader elements for weather and gif -->
+        <div id="weatherLoader" style="display: none">
+            Loading weather data...
+        </div>
+        <div id="gifLoader" style="display: none">Loading GIF...</div>
+
+        <!-- Weather data display -->
+        <div id="weatherData">
+            <h2>Weather Details</h2>
+            <p>City: <span id="cityName"></span></p>
+            <p>Country: <span id="country"></span></p>
+            <p>Local Time: <span id="localTime"></span></p>
+            <p>Temperature: <span id="temperature"></span></p>
+            <p>Feels Like: <span id="feelsLike"></span></p>
+            <p>Condition: <span id="condition"></span></p>
+            <p>Humidity: <span id="humidity"></span></p>
+            <p>Wind: <span id="wind"></span></p>
+            <p>Rain: <span id="rain"></span></p>
+            <p>Cloudiness: <span id="cloudiness"></span></p>
+            <img id="weatherIcon" src="" alt="Weather Icon" />
+        </div>
+
+        <!-- Giphy display -->
+        <div id="gifSection">
+            <h2>Weather GIF</h2>
+            <img id="weatherGif" src="" alt="Weather GIF" />
+        </div>
+
+        <!-- Load your scripts -->
+        <script type="module" src="index.js"></script>
+    </body>
+</html>
