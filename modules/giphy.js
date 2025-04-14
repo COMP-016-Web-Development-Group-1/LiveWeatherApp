@@ -7,7 +7,9 @@
  */
 async function getGiphyData(search, start_cb, end_cb) {
     const GIPHY_API_KEY = "hV5tRiJrT5cxSjliq4ginTRaknGbyvvH";
-    const endpoint = `https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${search}`;
+    const endpoint = `https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${encodeURIComponent(
+        search
+    )}`;
 
     try {
         if (typeof start_cb === "function") start_cb();

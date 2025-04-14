@@ -8,7 +8,9 @@
  */
 async function getWeatherData(city, start_cb, end_cb) {
     const OPEN_WEATHER_MAP_API_KEY = "f1035e3fb9f4d11c50209888a708e981";
-    const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPEN_WEATHER_MAP_API_KEY}&units=metric`;
+    const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        city
+    )}&appid=${OPEN_WEATHER_MAP_API_KEY}&units=metric`;
 
     try {
         if (typeof start_cb === "function") start_cb();
