@@ -4,45 +4,84 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Lively Weather</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
 </head>
 
 <body>
-    <h1>Live Weather App + Giphy</h1>
+    <div id="sidebar">
 
-    <!-- Search form -->
-    <form id="searchForm">
-        <input type="text" id="searchInput" placeholder="Enter city name" />
-        <button type="button" id="searchBtn">Search</button>
-    </form>
+        <!-- Logo and title -->
+        <img id="logoImage" src="images/logo.png" alt="Logo" />
+        <h1 class="app-title">Lively Weather</h1>
 
-    <!-- Loader elements for weather and gif -->
-    <div id="weatherLoader" style="display: none">
-        Loading weather data...
-    </div>
-    <div id="gifLoader" style="display: none">Loading GIF...</div>
+        <div id="searchFormContainer">
 
-    <!-- Weather data display -->
-    <div id="weatherData">
-        <h2>Weather Details</h2>
-        <p>City: <span id="cityName"></span></p>
-        <p>Country: <span id="country"></span></p>
-        <p>Local Time: <span id="localTime"></span></p>
-        <p>Temperature: <span id="temperature"></span></p>
-        <p>Feels Like: <span id="feelsLike"></span></p>
-        <p>Condition: <span id="condition"></span></p>
-        <p>Humidity: <span id="humidity"></span></p>
-        <p>Wind: <span id="wind"></span></p>
-        <p>Rain: <span id="rain"></span></p>
-        <p>Cloudiness: <span id="cloudiness"></span></p>
-        <img id="weatherIcon" src="" alt="Weather Icon" />
+            <h2 class="search-prompt">Find the weather for your city!</h2>
+
+            <!-- Search form -->
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Enter city name" />
+                <button type="button" id="searchBtn">Search</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer id="sidebarFooter">
+            Group #1: Web Development
+        </footer>
     </div>
 
-    <!-- Giphy display -->
-    <div id="gifSection">
-        <h2>Weather GIF</h2>
-        <img id="weatherGif" src="" alt="Weather GIF" />
+    <div id="mainContent">
+        <!-- Loader elements for weather and gif -->
+        <div id="weatherLoader" style="display: none">
+            Loading weather data...
+        </div>
+        <div id="gifLoader" style="display: none">Loading GIF...</div>
+
+        <!-- Weather and GIF container -->
+        <div id="weatherGifContainer">
+            <!-- Weather data display -->
+            <div id="weatherData">
+                <!-- Location Details -->
+                <div class="weather-box">
+                    <div class="weather-category" id="locationDetails">
+                        <h3>Location Details</h3>
+                        <p><strong>City:</strong> <span id="cityName"></span></p>
+                        <p><strong>Country:</strong> <span id="country"></span></p>
+                        <p><strong>Local Time:</strong> <span id="localTime"></span></p>
+                    </div>
+                </div>
+
+                <!-- Weather Measurements -->
+                <div class="weather-box">
+                    <div class="weather-category" id="weatherMeasurements">
+                        <h3>Weather Measurements</h3>
+                        <p><strong>Temperature:</strong> <span id="temperature"></span></p>
+                        <p><strong>Feels Like:</strong> <span id="feelsLike"></span></p>
+                        <p><strong>Humidity:</strong> <span id="humidity"></span></p>
+                        <p><strong>Wind:</strong> <span id="wind"></span></p>
+                        <p><strong>Rain:</strong> <span id="rain"></span></p>
+                        <p><strong>Cloudiness:</strong> <span id="cloudiness"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giphy display -->
+            <div id="gifSection">
+                <h2>Weather GIF</h2>
+                <img id="weatherGif" src="" alt="Weather GIF" />
+
+                <!-- Weather Condition -->
+                <div class="weather-box">
+                    <h3>Weather Condition</h3>
+                    <p><strong>Condition:</strong> <span id="condition"></span></p>
+                    <img id="weatherIcon" src="" alt="Weather Icon" />
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <!-- Load your scripts -->

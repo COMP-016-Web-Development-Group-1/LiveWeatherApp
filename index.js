@@ -14,26 +14,70 @@ const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const weatherDataDiv = document.getElementById("weatherData");
 const gifSectionDiv = document.getElementById("gifSection");
+const weatherLoader = document.getElementById("weatherLoader");
+const gifLoader = document.getElementById("gifLoader");
+const overlayLoader = document.createElement("div");
+overlayLoader.id = "overlayLoader";
+overlayLoader.innerHTML = `<div class="loader"></div>`;
+document.body.appendChild(overlayLoader);
 const greeting = document.querySelector("h1");
 
-// Create Reset Button
 const resetBtn = document.createElement("button");
 resetBtn.id = "resetBtn";
 resetBtn.textContent = "Reset";
-resetBtn.style.display = "none"; // Hide initially
 searchForm.appendChild(resetBtn);
 
-// Prevent form default submit
+disableResetButton();
+
+function clearWeatherData() {
+  document.getElementById("cityName").textContent = "";
+  document.getElementById("country").textContent = "";
+  document.getElementById("localTime").textContent = "";
+  document.getElementById("temperature").textContent = "";
+  document.getElementById("feelsLike").textContent = "";
+  document.getElementById("condition").textContent = "";
+  document.getElementById("humidity").textContent = "";
+  document.getElementById("wind").textContent = "";
+  document.getElementById("rain").textContent = "";
+  document.getElementById("cloudiness").textContent = "";
+  document.getElementById("weatherIcon").src = "";
+}
+
+function showOverlayLoader() {
+  overlayLoader.classList.add("active");
+}
+
+function hideOverlayLoader() {
+  overlayLoader.classList.remove("active");
+}
+
+function enableResetButton() {
+  resetBtn.classList.add("enabled");
+}
+
+function disableResetButton() {
+  resetBtn.classList.remove("enabled");
+}
+
 searchForm.addEventListener("submit", (e) => e.preventDefault());
 
-// Search button click
 searchBtn.addEventListener("click", async () => {
-  if (searchInput.value === "") return;
+  if (searchInput.value.trim() === "") {
+    searchInput.classList.add("shake");
+    setTimeout(() => {
+      searchInput.classList.remove("shake");
+    }, 400);
+    return;
+  }
+
+  clearWeatherData();
+
+  showOverlayLoader();
 
   const weatherData = await getWeatherData(
     searchInput.value,
-    showWeatherLoading,
-    hideWeatherLoading
+    () => {},
+    () => {}
   );
 
   if (weatherData !== null) {
@@ -47,50 +91,35 @@ searchBtn.addEventListener("click", async () => {
 
     const giphyUrl = await getGiphyData(
       gifSearch,
-      showGifLoading,
-      hideGifLoading
+      () => {},
+      () => {}
     );
     displayGiphy(giphyUrl);
 
-    // Reveal sections
-    weatherDataDiv.classList.add("active");
-    gifSectionDiv.classList.add("active");
+    setTimeout(() => {
+      hideOverlayLoader();
 
-    // Fade out greeting
-    if (greeting) greeting.classList.add("hidden");
+      weatherDataDiv.classList.add("active");
+      gifSectionDiv.classList.add("active");
 
-    // Show reset button
-    resetBtn.style.display = "inline-block";
+      enableResetButton();
+    }, 700);
   } else {
+    hideOverlayLoader();
     alert("Location not found, Please try a different location.");
   }
 });
 
 // Reset button click
 resetBtn.addEventListener("click", () => {
+  if (!resetBtn.classList.contains("enabled")) return;
+
   searchInput.value = "";
 
-  // Hide sections
   weatherDataDiv.classList.remove("active");
   gifSectionDiv.classList.remove("active");
 
-  // Clear weather and gif content
-  document.getElementById("cityName").textContent = "";
-  document.getElementById("country").textContent = "";
-  document.getElementById("localTime").textContent = "";
-  document.getElementById("temperature").textContent = "";
-  document.getElementById("feelsLike").textContent = "";
-  document.getElementById("condition").textContent = "";
-  document.getElementById("humidity").textContent = "";
-  document.getElementById("wind").textContent = "";
-  document.getElementById("rain").textContent = "";
-  document.getElementById("cloudiness").textContent = "";
-  document.getElementById("weatherIcon").src = "";
-  document.getElementById("weatherGif").src = "";
+  clearWeatherData();
 
-  // Show greeting back
-  if (greeting) greeting.classList.remove("hidden");
-
-  // Hide reset button
-  resetBtn.style.display = "none";
+  disableResetButton();
 });
